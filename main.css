@@ -17,7 +17,7 @@ div.menu {
 div.menu ul,
 div.menu ul li {
     margin: 0;
-    padding: 0 ;
+    padding: 0;
     list-style: none;
     display: inline-block;
 }
@@ -32,7 +32,7 @@ div.menu ul li a {
     margin: 0;
 }
 
-div.menu ul li a:hover  {
+div.menu ul li a:hover {
     background-color: white;
     color: #4d5791;
 }
@@ -92,7 +92,7 @@ div.hero h2 {
 }
 
 @media screen and (min-width: 768px) {
-    .container .div.text-box {
+    .container div.text-box {
         margin: 10px;
     }
 }
