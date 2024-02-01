@@ -8,8 +8,8 @@
     <title>Personal Budget - Budget Management App</title>
     <meta name="mobileoptimized" content="width">
     <!-- This is an SEO Change -->
-    <link rel="stylesheet" href="/pb/reset.css">
-    <link rel="stylesheet" href="/pb/main.css">
+    <link rel="stylesheet" href="/reset.css">
+    <link rel="stylesheet" href="/main.css">
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
@@ -18,8 +18,8 @@
             <ul>
                 <!-- This is an A11y Change -->
                 <li><a href="/">Home</a></li>
-                <li><a href="/pb/about.html">About</a></li>
-                <li><a href="/pb/login.html">Login</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/login.html">Login</a></li>
                 <!-- This is an SEO Change -->
                 <li><a href="https://google.com" rel="noopener noreferrer" target="_blank">Google</a></li>
             </ul>
@@ -56,8 +56,10 @@
         
                 <div class="text-box">
                     <!-- This is an SEO Change -->
-                    <h2>Free</h2>
-                    <p>This app is free!!! And you are the only one holding your data!</p>
+                    <h2>Chart</h2>
+                    <p>
+                        <canvas id="myChart" width="400" height="'400"></canvas>
+                    </p>
                 </div>
         
             </article>
@@ -71,6 +73,50 @@
             <p>All rights reserved &copy; Navya Vejalla</p>
         </div>
     </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js" integrity="sha512-NQfB/bDaB8kaSXF8E77JjhHG5PM6XVRxvHzkZiwl3ddWCEPBa23T76MuWSwAJdMGJnmQqM0VeY9kFszsrBEFrQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js" integrity="sha512-G8JE1Xbr0egZE5gNGyUm1fF764iHVfRXshIoUWCTPAbKkkItp/6qal5YAHXrxEu4HNfPTQs6HOu3D5vCGS1j3w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+                var dataSource = {
+                    datasets: [
+                        {
+                            data:[30,350,90],
+                            backgroundColor:[
+                                '#ffcd56',
+                                '#ff6384',
+                                '#36a2eb',
+                                '#fd6b19',
+                            ],
+                        }
+                    ],
+                    labels: [
+                        'Eat Out',
+                        'Rent',
+                        'Groceries'
+                    ]
+                };
+
+                function createChart() {
+                    var ctx = document.getElementById("myChart").getContext('2d');
+                    var myPieChart = new Chart(ctx, {
+                        type: 'pie',
+                        data: dataSource
+                    });      
+                }
+                function getBudget(){
+                    axios.get('/budget')
+                    .then(function(res){
+                        console.log(res);
+                        for ( var i = 0; i < res.data.myBudget.length; i++) {
+                            dataSource.datasets[0].data[i] = res.data.myBudget[i].budget;
+                            //dataSource.datasets[0].backgroundColor[i] = res.data.myMonthlyBudget[i].color;
+                            dataSource.labels[i] = res.data.myBudget[i].title;
+                        }
+                        createChart();
+                    });
+                }
+                getBudget();
+    </script>
 
 </body>
 </html>
