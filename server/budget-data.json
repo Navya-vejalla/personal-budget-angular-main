@@ -1,0 +1,12 @@
+{
+    "categories": [
+      { "name": "Rent", "amount": 1200 },
+      { "name": "Grocery", "amount": 300 },
+      { "name": "Eat out", "amount": 150 },
+      { "name": "Utilities", "amount": 200 },
+      { "name": "Entertainment", "amount": 100 },
+      { "name": "Transportation", "amount": 75 },
+      { "name": "Healthcare", "amount": 50 }
+      
+    ]
+  }
